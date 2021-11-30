@@ -8,12 +8,12 @@
 
 date='2021-11-01'
 
-Admin.create!(
+Admin.create(
   email: 'admin@admin.com',
   password: 'naganocake'
   )
 
-Customer.create!(
+Customer.create(
   last_name: "令和",
   first_name: "道子",
   last_name_kana: "レイワ",

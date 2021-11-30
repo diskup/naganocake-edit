@@ -21,11 +21,9 @@ class Customer::OrdersController < ApplicationController
   end 
 
   def confirm
-    @cart_items=current_customer.cart_items
-
     @order=Order.new(order_params)
     @order.shipping_fee=800
-    @total_price_except_fee = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
+    @total_price_except_fee = current_customer.cart_items.inject(0) { |sum, item| sum + item.subtotal }
     @order.total_price=@total_price_except_fee + @order.shipping_fee
 
     if params[:order][:select_address] == "0"
