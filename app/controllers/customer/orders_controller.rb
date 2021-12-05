@@ -15,10 +15,10 @@ class Customer::OrdersController < ApplicationController
   def show
     if params[:id]=="confirm"
       redirect_to new_order_path
-    else 
+    else
       @order = Order.find(params[:id])
     end
-  end 
+  end
 
   def confirm
     @order=Order.new(order_params)
@@ -31,11 +31,13 @@ class Customer::OrdersController < ApplicationController
       @order.address=current_customer.address
       @order.name=current_customer.full_name
 
-    elsif params[:order][:select_address] == "1"
+    elsif params[:order][:select_address] == "1" && params[:order][:shipping_id] != ""
       @shipping=Shipping.find(params[:order][:shipping_id])
       @order.post_code=@shipping.post_code
       @order.address=@shipping.address
       @order.name=@shipping.name
+    else
+      redirect_to request.referer
     end
   end
 
