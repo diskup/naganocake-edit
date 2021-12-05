@@ -31,7 +31,7 @@ class Customer::OrdersController < ApplicationController
       @order.address=current_customer.address
       @order.name=current_customer.full_name
 
-    elsif params[:order][:select_address] == "1" && params[:order][:shipping_id] != ""
+    elsif params[:order][:select_address] == "1" && params[:order][:shipping_id] != nil
       @shipping=Shipping.find(params[:order][:shipping_id])
       @order.post_code=@shipping.post_code
       @order.address=@shipping.address
